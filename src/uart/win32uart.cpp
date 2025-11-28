@@ -162,7 +162,9 @@ auto Win32UART::open() -> std::expected<bool, std::pair<int, std::string>> {
             std::make_pair(static_cast<int>(err), win32error2string(err))};
     }
     isopen_ = true;
-    set_timeout(timeout_);
+    if (not set_timeout(timeout_)) {
+        return false;
+    }
     auto result = configure();
     isopen_ = result.has_value() and result.value();
     if (not isopen_) {
