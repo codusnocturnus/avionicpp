@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "type_traits": "cpp",
+        "expected": "cpp",
+        "chrono": "cpp",
+        "optional": "cpp",
+        "regex": "cpp",
+        "system_error": "cpp",
+        "algorithm": "cpp",
+        "complex": "cpp",
+        "functional": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp",
+        "span": "cpp"
+    }
+}

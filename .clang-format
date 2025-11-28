@@ -1,0 +1,12 @@
+---
+BasedOnStyle: Chromium
+IndentWidth: 4
+ColumnLimit: 120
+UseTab: Never
+UseCRLF: false
+
+---
+Language: Cpp
+# Force pointers to the type for C++.
+DerivePointerAlignment: false
+PointerAlignment: Left

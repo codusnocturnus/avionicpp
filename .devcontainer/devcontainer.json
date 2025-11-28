@@ -1,0 +1,24 @@
+{
+    "name": "C++ Development",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "cmake.configureOnOpen": true
+            },
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cmake-tools",
+                "twxs.cmake",
+                "ryanluker.vscode-coverage-gutters",
+                "matepek.vscode-catch2-test-adapter",
+                "saoudrizwan.claude-dev"
+            ]
+        }
+    },
+    "remoteUser": "root"
+}

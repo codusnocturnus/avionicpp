@@ -1,0 +1,41 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b995093..ab14a60 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,14 +1,17 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.31)
+ 
+ project(minmea)
+ 
+ option(MINMEA_ENABLE_TESTING "Enable building and running unit tests" ON)
+ 
+-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra -Werror -std=c99")
+-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_POSIX_C_SOURCE=199309L -D_BSD_SOURCE -D_DEFAULT_SOURCE -D_DARWIN_C_SOURCE")
++if(NOT MSVC)
++    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra -Werror -std=c99")
++    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_POSIX_C_SOURCE=199309L -D_BSD_SOURCE -D_DEFAULT_SOURCE -D_DARWIN_C_SOURCE")
++endif()
+ 
+ set(minmea_SRCS minmea.c minmea.h)
+ add_library(minmea ${minmea_SRCS})
++target_include_directories(minmea PUBLIC ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_CURRENT_LIST_DIR}/compat)
+ 
+ add_executable(example example.c)
+ target_link_libraries(example minmea)
+diff --git a/minmea.h b/minmea.h
+index c23f777..1783891 100644
+--- a/minmea.h
++++ b/minmea.h
+@@ -22,6 +22,11 @@ extern "C" {
+ #include <minmea_compat.h>
+ #endif
+ 
++#ifdef _MSC_VER
++#define inline __inline
++#define timegm _mkgmtime
++#endif
++
+ #ifndef MINMEA_MAX_SENTENCE_LENGTH
+ #define MINMEA_MAX_SENTENCE_LENGTH 80
+ #endif
