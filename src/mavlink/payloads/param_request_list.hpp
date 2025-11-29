@@ -19,7 +19,7 @@ struct ParamRequestList_T {
     typename Traits::template Field<std::uint8_t> target_component;  ///< Component ID
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<ParamRequestList_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<ParamRequestList_T<Traits>>(); }
 };
 
 using ParamRequestList = ParamRequestList_T<TxTraits>;

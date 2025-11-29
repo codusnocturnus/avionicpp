@@ -29,7 +29,7 @@ struct GpsStatus_T {
         satellite_snr;  ///< Signal to noise ratio of satellite
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<GpsStatus_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<GpsStatus_T<Traits>>(); }
 };
 
 using GpsStatus = GpsStatus_T<TxTraits>;

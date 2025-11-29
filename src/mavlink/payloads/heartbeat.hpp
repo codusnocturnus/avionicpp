@@ -37,7 +37,7 @@ struct Heartbeat_T {
                                                                     ///< uint8_t_mavlink_version
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<Heartbeat_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<Heartbeat_T<Traits>>(); }
 };
 
 using Heartbeat = Heartbeat_T<TxTraits>;

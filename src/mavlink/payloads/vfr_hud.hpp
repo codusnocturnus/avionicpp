@@ -24,7 +24,7 @@ struct VfrHud_T {
         throttle;  ///< Current throttle setting in integer percent, 0 to 100.
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<VfrHud_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<VfrHud_T<Traits>>(); }
 };
 
 using VfrHud = VfrHud_T<TxTraits>;

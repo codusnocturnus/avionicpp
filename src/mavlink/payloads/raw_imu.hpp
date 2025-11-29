@@ -29,7 +29,7 @@ struct RawImu_T {
     typename Traits::template Field<std::int16_t> zmag;   ///< Z Magnetic field (raw)
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<RawImu_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<RawImu_T<Traits>>(); }
 };
 
 using RawImu = RawImu_T<TxTraits>;

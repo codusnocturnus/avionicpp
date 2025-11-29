@@ -18,7 +18,7 @@ struct SystemTime_T {
     typename Traits::template Field<std::uint32_t> time_boot_ms;    ///< Timestamp (time since system boot).
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<SystemTime_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<SystemTime_T<Traits>>(); }
 };
 
 using SystemTime = SystemTime_T<TxTraits>;

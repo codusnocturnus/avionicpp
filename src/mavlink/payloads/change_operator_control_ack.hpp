@@ -21,7 +21,7 @@ struct ChangeOperatorControlAck_T {
                                                         ///< passkey encryption method, 3: NACK: Already under control
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<ChangeOperatorControlAck_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<ChangeOperatorControlAck_T<Traits>>(); }
 };
 
 using ChangeOperatorControlAck = ChangeOperatorControlAck_T<TxTraits>;

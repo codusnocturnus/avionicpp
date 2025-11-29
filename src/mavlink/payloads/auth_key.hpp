@@ -19,7 +19,7 @@ struct AuthKey_T {
     typename Traits::template Field<std::array<char, 32>> key;  ///< key
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<AuthKey_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<AuthKey_T<Traits>>(); }
 };
 
 using AuthKey = AuthKey_T<TxTraits>;

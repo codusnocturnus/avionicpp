@@ -23,7 +23,7 @@ struct Attitude_T {
     typename Traits::template Field<float> yawspeed;              ///< Yaw angular speed.
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<Attitude_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<Attitude_T<Traits>>(); }
 };
 
 using Attitude = Attitude_T<TxTraits>;

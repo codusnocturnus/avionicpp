@@ -32,7 +32,7 @@ struct GlobalPositionInt_T {
         hdg;  ///< Vehicle heading (yaw angle) in degrees * 100, 0.0..359.99 degrees. If unknown, set to: UINT16_MAX.
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<GlobalPositionInt_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<GlobalPositionInt_T<Traits>>(); }
 };
 
 using GlobalPositionInt = GlobalPositionInt_T<TxTraits>;

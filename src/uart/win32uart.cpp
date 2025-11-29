@@ -1,10 +1,12 @@
 #include "win32uart.hpp"
 
+#include <algorithm>
 #include <chrono>
 #include <stdexcept>
 
 #include <errhandlingapi.h>
 #include <handleapi.h>
+#define NOMINMAX
 #include <windows.h>
 
 namespace uart {
@@ -132,7 +134,8 @@ auto Win32UART::set_timeout(std::chrono::milliseconds timeout_ms) -> std::expect
         }
         // various timeouts are in units of milliseconds
         auto cto = COMMTIMEOUTS{0};
-        const auto timeoutmultiplier = max(1, static_cast<DWORD>(bittime_ms));  // windows defines max as a macro
+        const auto timeoutmultiplier =
+            std::max<DWORD>(1, static_cast<DWORD>(bittime_ms));  // windows defines max as a macro
         cto.ReadIntervalTimeout = timeoutmultiplier;
         cto.ReadTotalTimeoutConstant = timeout_ms.count();
         cto.ReadTotalTimeoutMultiplier = timeoutmultiplier;

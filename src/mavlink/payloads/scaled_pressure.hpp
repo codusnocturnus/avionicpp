@@ -21,7 +21,7 @@ struct ScaledPressure_T {
     typename Traits::template Field<std::int16_t> temperature;    ///< Absolute pressure temperature
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<ScaledPressure_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<ScaledPressure_T<Traits>>(); }
 };
 
 using ScaledPressure = ScaledPressure_T<TxTraits>;

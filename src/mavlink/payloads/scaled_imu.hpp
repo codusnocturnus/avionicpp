@@ -27,7 +27,7 @@ struct ScaledImu_T {
     typename Traits::template Field<std::int16_t> zmag;           ///< Z Magnetic field
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<ScaledImu_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<ScaledImu_T<Traits>>(); }
 };
 
 using ScaledImu = ScaledImu_T<TxTraits>;

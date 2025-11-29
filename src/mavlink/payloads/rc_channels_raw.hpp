@@ -31,7 +31,7 @@ struct RcChannelsRaw_T {
                                                          ///< units/scale. Values: [0-254], UINT8_MAX: invalid/unknown.
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<RcChannelsRaw_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<RcChannelsRaw_T<Traits>>(); }
 };
 
 using RcChannelsRaw = RcChannelsRaw_T<TxTraits>;

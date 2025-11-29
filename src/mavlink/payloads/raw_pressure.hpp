@@ -24,7 +24,7 @@ struct RawPressure_T {
     typename Traits::template Field<std::int16_t> temperature;  ///< Raw Temperature measurement (raw)
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<RawPressure_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<RawPressure_T<Traits>>(); }
 };
 
 using RawPressure = RawPressure_T<TxTraits>;

@@ -46,7 +46,7 @@ struct TestSysStatus {
 SCENARIO("CRC Extra Calculation", "[mavlink][checksum]") {
     GIVEN("A Heartbeat message definition") {
         THEN("the calculated CRC Extra matches the known value (50)") {
-            constexpr std::uint8_t crc_official = mavlink::payloads::Heartbeat::CrcExtra;
+            constexpr std::uint8_t crc_official = mavlink::payloads::Heartbeat::CrcExtra();
             CHECK(crc_official == 50);
 
             constexpr std::uint8_t crc_local = calculate_crc_extra<TestHeartbeat>();

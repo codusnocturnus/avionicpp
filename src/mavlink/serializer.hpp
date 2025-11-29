@@ -88,7 +88,7 @@ template <typename MessageT>
     crc_accumulate_buffer(crc, reinterpret_cast<const char*>(ptr + 1), 9);
     crc_accumulate_buffer(crc, reinterpret_cast<const char*>(payload_start), payload_len);
 
-    crc_accumulate(MessageT::CrcExtra, crc);
+    crc_accumulate(MessageT::CrcExtra(), crc);
 
     auto crc_pos = payload_start + payload_len;
     crc_pos[0] = crc & 0xFF;

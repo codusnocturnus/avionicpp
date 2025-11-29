@@ -32,7 +32,7 @@ struct ParamSet_T {
     typename Traits::template Field<std::uint8_t> param_type;  ///< Onboard parameter type. (MAV_PARAM_TYPE)
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<ParamSet_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<ParamSet_T<Traits>>(); }
 };
 
 using ParamSet = ParamSet_T<TxTraits>;

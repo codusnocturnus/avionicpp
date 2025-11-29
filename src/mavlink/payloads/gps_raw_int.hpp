@@ -47,7 +47,7 @@ struct GpsRawInt_T {
         satellites_visible;  ///< Number of satellites visible. If unknown, set to 255.
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<GpsRawInt_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<GpsRawInt_T<Traits>>(); }
 };
 
 using GpsRawInt = GpsRawInt_T<TxTraits>;

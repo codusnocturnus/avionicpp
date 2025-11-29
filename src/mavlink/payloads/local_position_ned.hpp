@@ -24,7 +24,7 @@ struct LocalPositionNed_T {
     typename Traits::template Field<float> vz;                    ///< Z Speed
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<LocalPositionNed_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<LocalPositionNed_T<Traits>>(); }
 };
 
 using LocalPositionNed = LocalPositionNed_T<TxTraits>;

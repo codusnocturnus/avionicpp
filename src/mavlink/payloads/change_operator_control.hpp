@@ -27,7 +27,7 @@ struct ChangeOperatorControl_T {
                   ///< terminated. The characters may involve A-Z, a-z, 0-9, and "!?,.-"
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<ChangeOperatorControl_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<ChangeOperatorControl_T<Traits>>(); }
 };
 
 using ChangeOperatorControl = ChangeOperatorControl_T<TxTraits>;

@@ -31,7 +31,7 @@ struct CommandLong_T {
                                                                  ///< Confirmation transmissions (e.g. for kill command)
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<CommandLong_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<CommandLong_T<Traits>>(); }
 };
 
 using CommandLong = CommandLong_T<TxTraits>;

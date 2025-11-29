@@ -34,7 +34,7 @@ struct CommandInt_T {
     typename Traits::template Field<std::uint8_t> autocontinue;      ///< Not used (set 0).
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<CommandInt_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<CommandInt_T<Traits>>(); }
 };
 
 using CommandInt = CommandInt_T<TxTraits>;

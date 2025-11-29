@@ -52,7 +52,7 @@ struct SysStatus_T {
                             ///< the remaining battery.
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<SysStatus_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<SysStatus_T<Traits>>(); }
 };
 
 using SysStatus = SysStatus_T<TxTraits>;

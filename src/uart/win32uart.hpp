@@ -11,6 +11,7 @@
 #include <string_view>
 #include <unordered_map>
 
+#define NOMINMAX
 #include <windows.h>
 
 #include "settings.hpp"

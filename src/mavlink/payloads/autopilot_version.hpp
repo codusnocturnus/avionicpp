@@ -39,7 +39,7 @@ struct AutopilotVersion_T {
                ///< otherwise use uid)
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<AutopilotVersion_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<AutopilotVersion_T<Traits>>(); }
 };
 
 using AutopilotVersion = AutopilotVersion_T<TxTraits>;

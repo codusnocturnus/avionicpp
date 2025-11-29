@@ -28,7 +28,7 @@ struct ParamRequestRead_T {
                    ///< provide 16+1 bytes storage if the ID is stored as string
 
     // Calculated CRC Extra
-    static constexpr std::uint8_t CrcExtra = calculate_crc_extra<ParamRequestRead_T<Traits>>();
+    static constexpr std::uint8_t CrcExtra() { return calculate_crc_extra<ParamRequestRead_T<Traits>>(); }
 };
 
 using ParamRequestRead = ParamRequestRead_T<TxTraits>;
