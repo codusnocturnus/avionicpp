@@ -97,7 +97,7 @@ class PosixUART {
     const std::string devicename_;
     speed_t baudrate_{B9600};
     std::uint8_t charactersize_{CS8};
-    uint8_t parity_{0};
+    tcflag_t parity_{0};
     std::uint8_t stopbits_{0U};
     cc_t timeout_deciseconds_{0};
     bool isopen_{false};
@@ -108,8 +108,8 @@ class PosixUART {
     const static std::unordered_map<speed_t, BaudRate> baud2enum_;
     const static std::unordered_map<CharacterSize, std::uint8_t> enum2charsize_;
     const static std::unordered_map<std::uint8_t, CharacterSize> charsize2enum_;
-    const static std::unordered_map<Parity, std::uint8_t> enum2parity_;
-    const static std::unordered_map<std::uint8_t, Parity> parity2enum_;
+    const static std::unordered_map<Parity, tcflag_t> enum2parity_;
+    const static std::unordered_map<tcflag_t, Parity> parity2enum_;
 
     /// @return true if the uart is open and changes are made,
     ///         false if the uart isn't open,
