@@ -12,10 +12,15 @@ project(avionicpp
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 option(AVIONICPP_BUILD_TESTS "Build tests for Avionicpp" ON)
+option(AVIONICPP_BUILD_BENCHMARKS "Build benchmarks for Avionicpp" ON)
 
 add_subdirectory(src)
 
-enable_testing()
-add_subdirectory(tests)
+if (${AVIONICPP_BUILD_TESTS})
+    enable_testing()
+    add_subdirectory(tests)
+endif()
 
-add_subdirectory(benchmarks)
+if(${AVIONICPP_BUILD_BENCHMARKS})
+    add_subdirectory(benchmarks)
+endif()
