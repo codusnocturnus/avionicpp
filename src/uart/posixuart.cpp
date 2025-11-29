@@ -75,12 +75,12 @@ const std::unordered_map<std::uint8_t, CharacterSize> PosixUART::charsize2enum_ 
                                                                                    {CS7, CharacterSize::cs7},
                                                                                    {CS8, CharacterSize::cs8}};
 
-const std::unordered_map<Parity, std::uint8_t> PosixUART::enum2parity_ = {{Parity::none, 0U},
-                                                                          {Parity::even, PARENB},
-                                                                          {Parity::odd, PARENB | PARODD}};
-const std::unordered_map<std::uint8_t, Parity> PosixUART::parity2enum_ = {{0U, Parity::none},
-                                                                          {PARENB, Parity::even},
-                                                                          {PARENB | PARODD, Parity::odd}};
+const std::unordered_map<Parity, tcflag_t> PosixUART::enum2parity_ = {{Parity::none, 0U},
+                                                                      {Parity::even, PARENB},
+                                                                      {Parity::odd, PARENB | PARODD}};
+const std::unordered_map<tcflag_t, Parity> PosixUART::parity2enum_ = {{0U, Parity::none},
+                                                                      {PARENB, Parity::even},
+                                                                      {PARENB | PARODD, Parity::odd}};
 
 auto PosixUART::baudrate() const noexcept -> BaudRate {
     auto baud = BaudRate::b9600;
@@ -180,7 +180,11 @@ auto PosixUART::configure() -> std::expected<bool, std::pair<int, std::string>> 
         return std::unexpected<std::pair<int, std::string>>{std::make_pair(errno, std::strerror(errno))};
     }
     /// TODO: higher baud rates need a different process?
-    tios.c_cflag = baudrate_ | charactersize_ | parity_ | stopbits_ | CLOCAL | CREAD;
+    tios.c_cflag = charactersize_ | parity_ | stopbits_ | CLOCAL | CREAD;
+    if (cfsetispeed(&tios, baudrate_) != 0 || cfsetospeed(&tios, baudrate_) != 0) {
+        return std::unexpected<std::pair<int, std::string>>{std::make_pair(errno, std::strerror(errno))};
+    }
+
     tios.c_iflag = IGNPAR | INPCK;
     tios.c_oflag = 0;
     tios.c_lflag = 0;  // non-canonical, no echo, ...
@@ -201,6 +205,7 @@ auto PosixUART::configure() -> std::expected<bool, std::pair<int, std::string>> 
 void PosixUART::close() {
     if (isopen_) {
         ::close(uarthandle_);
+        isopen_ = false;
     }
 }
 

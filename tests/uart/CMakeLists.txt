@@ -8,6 +8,14 @@ target_sources(${target}
     uartconfiguretests.cpp
     stubuarttests.cpp
 )
+
+if(UNIX)
+    target_sources(${target}
+        PRIVATE
+        test_posixuart.cpp
+    )
+endif()
+
 target_link_libraries(${target}
     ${PROJECT_NAME}::uart
     Catch2::Catch2WithMain

@@ -15,6 +15,7 @@ add_library(${target} OBJECT
     test_rot.cpp
     test_serializer.cpp
     test_utilities.cpp
+    test_utilities_extra.cpp
     test_vtg.cpp
     test_zda.cpp
 )
