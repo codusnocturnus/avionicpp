@@ -69,7 +69,8 @@ RUN apt-get update && apt-get install -y \
     g++-14 \
     gdb \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100 \
+    && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-14 100
 
 # Install latest LLVM/Clang using the official script
 # We target version 21
