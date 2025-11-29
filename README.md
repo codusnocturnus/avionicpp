@@ -3,7 +3,6 @@
 [![Linux Clang](https://github.com/codusnocturnus/avionicpp/actions/workflows/ci_linux_clang.yml/badge.svg)](https://github.com/codusnocturnus/avionicpp/actions/workflows/ci_linux_clang.yml)
 [![Linux GCC](https://github.com/codusnocturnus/avionicpp/actions/workflows/ci_linux_gcc.yml/badge.svg)](https://github.com/codusnocturnus/avionicpp/actions/workflows/ci_linux_gcc.yml)
 [![Windows MSVC](https://github.com/codusnocturnus/avionicpp/actions/workflows/ci_windows_msvc.yml/badge.svg)](https://github.com/codusnocturnus/avionicpp/actions/workflows/ci_windows_msvc.yml)
-[![Coverage Status](https://coveralls.io/repos/github/codusnocturnus/avionicpp/badge.svg?branch=main)](https://coveralls.io/github/codusnocturnus/avionicpp?branch=main)
 
 **avionicpp** is a modern C++ library designed for communicating with common avionics devices and processing their data efficiently. It leverages the latest C++ standards (C++20/23) to provide a type-safe, zero-allocation, and high-performance interface for protocols like MAVLink and NMEA-0183, as well as cross-platform UART communication.
 
