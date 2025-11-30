@@ -93,7 +93,7 @@ class PosixUART {
     }
 
    private:
-    int uarthandle_{0};
+    int uarthandle_{-1};
     const std::string devicename_;
     speed_t baudrate_{B9600};
     std::uint8_t charactersize_{CS8};
