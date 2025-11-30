@@ -205,6 +205,7 @@ auto PosixUART::configure() -> std::expected<bool, std::pair<int, std::string>> 
 void PosixUART::close() {
     if (isopen_) {
         ::close(uarthandle_);
+        uarthandle_ = -1;
         isopen_ = false;
     }
 }
