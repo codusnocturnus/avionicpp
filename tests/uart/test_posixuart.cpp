@@ -44,30 +44,28 @@ SCENARIO("PosixUART Communication via PTY", "[uart][posix]") {
                         UNSCOPED_INFO("Baud error: " << res_baud.error().first << " " << res_baud.error().second);
                     }
                     CHECK(res_baud.has_value());
-                    CHECK(serial.baudrate() == uart::BaudRate::b115200);
                 }
+                CHECK(serial.baudrate() == uart::BaudRate::b115200);
 
                 // Note: Parity/CharSize/StopBits might fail on PTY, so we check or warn
                 auto res_par = serial.set_parity(uart::Parity::even);
                 if (!res_par) {
                     WARN("Parity configuration failed on PTY: " << res_par.error().second);
-                } else {
-                    CHECK(serial.parity() == uart::Parity::even);
                 }
+                // Verify getter returns the set value (state is updated even if configure fails)
+                CHECK(serial.parity() == uart::Parity::even);
 
                 auto res_char = serial.set_charactersize(uart::CharacterSize::cs8);
                 if (!res_char) {
                     WARN("CharacterSize configuration failed on PTY: " << res_char.error().second);
-                } else {
-                    CHECK(serial.charactersize() == uart::CharacterSize::cs8);
                 }
+                CHECK(serial.charactersize() == uart::CharacterSize::cs8);
 
                 auto res_stop = serial.set_stopbits(uart::StopBits::sb1);
                 if (!res_stop) {
                     WARN("StopBits configuration failed on PTY: " << res_stop.error().second);
-                } else {
-                    CHECK(serial.stopbits() == uart::StopBits::sb1);
                 }
+                CHECK(serial.stopbits() == uart::StopBits::sb1);
             }
 
             AND_WHEN("Setting invalid baudrate") {
