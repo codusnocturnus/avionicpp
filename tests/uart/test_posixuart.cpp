@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <array>
 #include <catch2/catch_test_macros.hpp>
+#include <cerrno>
+#include <climits>
+#include <span>
 #include <string>
 #include <vector>
 
@@ -114,6 +117,36 @@ SCENARIO("PosixUART Communication via PTY", "[uart][posix]") {
                     CHECK(*read_res == 3);
                     CHECK(rx_buf[0] == 0xAA);
                     CHECK(rx_buf[2] == 0xCC);
+                }
+            }
+
+            AND_WHEN("Write with buffer larger than SSIZE_MAX") {
+                uint8_t dummy;
+                // Create a span claiming to be larger than SSIZE_MAX
+                std::span<uint8_t> huge_span(&dummy, static_cast<size_t>(SSIZE_MAX) + 1);
+
+                auto result = serial.write(huge_span);
+
+                THEN("It fails with EFAULT but handles the size check") {
+                    CHECK_FALSE(result.has_value());
+                    if (!result) {
+                        // EFAULT because address range is invalid
+                        CHECK(result.error().first == EFAULT);
+                    }
+                }
+            }
+
+            AND_WHEN("Read with buffer larger than SSIZE_MAX") {
+                uint8_t dummy;
+                std::span<uint8_t> huge_span(&dummy, static_cast<size_t>(SSIZE_MAX) + 1);
+
+                auto result = serial.read(huge_span, static_cast<size_t>(SSIZE_MAX) + 1);
+
+                THEN("It fails with EFAULT but handles the size check") {
+                    CHECK_FALSE(result.has_value());
+                    if (!result) {
+                        CHECK(result.error().first == EFAULT);
+                    }
                 }
             }
 
